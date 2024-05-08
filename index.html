@@ -6,12 +6,17 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta charset="UTF-8">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/themes/vue.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar.min.css" />
   <style>
     .ver {
       position: fixed;
       z-index: 1111;
       top: 20px;
       left: 20px;
+    }
+
+    .sidebar .sidebar-nav {
+      padding-left: 10px;
     }
   </style>
 </head>
@@ -32,7 +37,6 @@
 
     window.onload = function () {
       var version = sessionStorage.getItem('ver') || 'a';
-      console.log(version)
       document.getElementById('version').value = version;
 
 
@@ -40,15 +44,24 @@
 
     window.$docsify = {
       el: "#app",
+      //  routerMode: 'history',
       themeColor: '#2B5CFD',
-      crossOriginLinks: 'https://github.com/Bing-b/docs',
       name: '技术文档',
       repo: '',
       loadSidebar: true,
       subMaxLevel: 3,
       search: 'auto',
-      basePath: 'https://github.com/Bing-b/docs',
-      // basePath: sessionStorage.getItem('version') || '/'
+      notFoundPage: {
+        '/': '_404.md',
+      },
+      nameLink: '/',
+      subMaxLevel: 3,
+      // alias: {
+      //   '/.*/_sidebar.md': '/_sidebar.md',
+      // },
+      sidebarDisplayLevel: 1,
+      //basePath: 'https://github.com/Bing-b/docs/',
+      basePath: sessionStorage.getItem('version') || '/'
     };
 
 
@@ -64,8 +77,14 @@
 
       window.location.reload();
     }
+
+
   </script>
+
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+  <!-- plugins -->
+  <script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+
 </body>
 
 </html>
