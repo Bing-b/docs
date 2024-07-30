@@ -1,0 +1,209 @@
+.ver {
+  position: fixed;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  width: 299px;
+  height: 70px;
+  z-index: 1111;
+  top: 96px;
+  padding: 10px 20px;
+  left: 0px;
+  background: #fff;
+  z-index: 11;
+}
+
+.sidebar .sidebar-nav {
+  padding-left: 10px;
+}
+
+.sidebar {
+  top: 180px;
+  padding: 20px 30px 40px;
+}
+
+.sidebar > h1 {
+  text-align: left;
+}
+
+.sidebar > h1 a {
+  font-size: 25px;
+  text-align: left;
+}
+
+.ver p {
+  margin: 0;
+}
+
+#version {
+  flex: 1;
+}
+
+.elementor-1334 .elementor-element.elementor-element-87effd4 {
+  background-color: #1c2b43 !important;
+}
+
+main {
+  height: calc(100% - 96px);
+  margin-top: 114px;
+  z-index: auto;
+}
+
+.navbar_nav .menu-item {
+  padding: 20px 0 !important;
+}
+
+.sidebar-toggle {
+  border: none !important;
+  background-color: transparent !important;
+  width: auto;
+}
+
+header {
+  background-color: #1c2b43;
+}
+
+.search {
+  position: fixed;
+  top: 100px;
+  right: 10px;
+  width: 310px;
+  background-color: #fff;
+  border-radius: 8px;
+  border-bottom: none !important;
+  z-index: 111;
+}
+
+.results-panel {
+  position: fixed;
+  top: 155px;
+  right: 10px;
+  width: 310px;
+  padding: 20px;
+  max-height: 75vh;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: auto;
+  border: 1px solid var(--color-set-one-bor-1);
+}
+
+.search .clear-button svg {
+  transform: scale(0.6) !important;
+}
+
+.sidebar-nav ul:not(.app-sub-sidebar) > li:not(.file)::before {
+  top: 9px !important;
+}
+
+.docsify-copy-code-button {
+  padding: 5px 10px !important;
+  background: #ececec !important;
+  border: none !important;
+  top: 10px !important;
+  right: 10px !important;
+}
+
+.docsify-copy-code-button .label {
+  color: #717ce0;
+  font-size: 14px;
+}
+
+.docsify-copy-code-button .success {
+  color: #42b983;
+}
+
+.docsify-copy-code-button .error {
+  color: red;
+}
+.sidebar-toggle {
+  display: none !important;
+}
+
+.app-sub-sidebar {
+  display: none !important;
+}
+
+/* 新的右侧浮动目录样式 */
+.floating-toc {
+  position: fixed;
+  right: 10px;
+  top: 23%;
+  width: 300px;
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  max-height: 70vh;
+  overflow: auto;
+}
+
+.floating-toc::-webkit-scrollbar {
+  width: 4px;
+  height: 10px;
+}
+.floating-toc::-webkit-scrollbar-track {
+  background: #efefef;
+  border-radius: 2px;
+}
+.floating-toc::-webkit-scrollbar-thumb {
+  background: #b7b7b7;
+  border-radius: 10px;
+}
+.floating-toc::-webkit-scrollbar-thumb:hover {
+  background: #767676;
+}
+.floating-toc::-webkit-scrollbar-corner {
+  background: #767676;
+}
+
+.floating-toc h2 {
+  font-size: 20px;
+  opacity: 0.7;
+  margin-bottom: 0;
+}
+
+.floating-toc ul {
+  list-style: none; /* 移除默认的圆点 */
+  padding-left: 0; /* 去掉左侧默认的内边距 */
+}
+
+.floating-toc ul li {
+  margin-bottom: 5px;
+  text-decoration: none;
+}
+
+.floating-toc li::before {
+  content: "-"; /* 设置短横线 */
+  padding-right: 8px; /* 短横线和文本之间的间距 */
+}
+
+.floating-toc .h1 {
+  line-height: 3;
+}
+
+.floating-toc .h1::before {
+  display: none;
+}
+
+.floating-toc a {
+  padding: 5px 0;
+  font-size: inherit !important;
+  color: inherit !important;
+  line-height: 24px;
+  text-decoration: none;
+}
+.floating-toc a:hover {
+  text-decoration: underline;
+  color: #717ce0 !important;
+}
+
+.markdown-section {
+  margin: 0 400px 0 100px !important;
+}
+
+/* 偏移锚点的距离 */
+.fix-anchor {
+  display: block;
+  position: relative;
+  top: -150px; /* 调整这个值来设置偏移距离 */
+  visibility: hidden;
+}

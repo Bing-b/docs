@@ -1,91 +1,177 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/themes/vue.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar.min.css" />
-  <style>
-    .ver {
-      position: fixed;
-      z-index: 1111;
-      top: 20px;
-      left: 20px;
-    }
-
-    .sidebar .sidebar-nav {
-      padding-left: 10px;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="ver">
-    <label for="version">版本:</label>
-    <select id="version" name="version" onchange="changeBasePath(this)">
-      <option value="a">v1</option>
-      <option value="b">v2</option>
-    </select>
-  </div>
-  <div id="app">
-
-    加载中
-  </div>
-  <script>
-
-    window.onload = function () {
-      var version = sessionStorage.getItem('ver') || 'a';
-      document.getElementById('version').value = version;
-
-
-    };
-
-    window.$docsify = {
-      el: "#app",
-      //routerMode: 'history',
-      themeColor: '#2B5CFD',
-      name: '技术文档',
-      repo: '',
-      loadSidebar: true,
-      subMaxLevel: 3,
-      search: 'auto',
-      notFoundPage: {
-        '/': './_404.md',
-      },
-      nameLink: '/',
-      subMaxLevel: 3,
-      // alias: {
-      //   '/.*/_sidebar.md': '/_sidebar.md',
-      // },
-      loadSidebar: './sidebar.md',
-      sidebarDisplayLevel: 1,
-      //basePath: 'https://github.com/Bing-b/docs/',
-      basePath: './'
-    };
-
-
-    function changeBasePath(select) {
-      var selectedValue = select.value;
-      if (selectedValue === "a") {
-        sessionStorage.setItem('version', '/');
-        sessionStorage.setItem('ver', 'a')
-      } else if (selectedValue === "b") {
-        sessionStorage.setItem('version', '/base2');
-        sessionStorage.setItem('ver', 'b')
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/npm/docsify/themes/vue.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar.min.css"
+    />
+    <link rel="stylesheet" href="./assets/css/doc.css" />
+    <style>
+      /* .ver {
+        position: fixed;
+        z-index: 1111;
+        top: 20px;
+        left: 20px;
       }
 
-      window.location.reload();
-    }
+      .sidebar .sidebar-nav {
+        padding-left: 10px;
+      } */
+    </style>
+  </head>
 
+  <body>
+    <div class="ver">
+      <label for="version">版本:</label>
+      <select id="version" name="version" onchange="changeBasePath(this)">
+        <option value="a">v1</option>
+        <option value="b">v2</option>
+      </select>
+    </div>
+    <div id="app">加载中</div>
+    <script>
+      window.onload = function () {
+        var version = sessionStorage.getItem("ver") || "a";
+        document.getElementById("version").value = version;
+      };
 
-  </script>
+      window.$docsify = {
+        el: "#app",
+        themeColor: "#3f78e0",
+        name: "技术文档",
+        auto2top: true,
+        search: "auto",
+        nameLink: "/",
+        sidebarDisplayLevel: 1,
+        alias: {
+          "/.*/_sidebar.md": "./_sidebar.md",
+          "/.*/sidebar.md": "./sidebar.md",
+        },
+        loadSidebar: true,
+        //basePath: 'https://github.com/Bing-b/docs/',
+        basePath: "./",
+        search: {
+          maxAge: 86400000, // 过期时间，单位毫秒，默认一天
+          paths: "auto",
+          placeholder: "请输入关键词",
+          noData: "未检索到相关内容!",
+          depth: 2,
+          hideOtherSidebarContent: false, // 是否隐藏其他侧边栏内容
+        },
+        copyCode: {
+          buttonText: "点击复制",
+          errorText: "Error",
+          successText: "复制成功",
+        },
+        plugins: [
+          function (hook, vm) {
+            hook.doneEach(function () {
+              // 创建一个新的侧边栏容器
+              var floatingToc = document.querySelector(".floating-toc");
+              if (!floatingToc) {
+                floatingToc = document.createElement("div");
+                floatingToc.className = "floating-toc";
+                document.body.appendChild(floatingToc);
 
-  <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
-  <!-- plugins -->
-  <script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+                // 创建头部元素
+                var tocHeader = document.createElement("h2");
+                tocHeader.textContent = "目录";
+                floatingToc.appendChild(tocHeader);
+              }
 
-</body>
+              // 清空当前内容，但保留头部
+              floatingToc.innerHTML = "<h2>目录</h2>";
 
+              // 获取当前文章的地址
+              var currentUrl = window.location.href.split("?")[0];
+
+              // 获取指定 class 下面的标题
+              var content = document.querySelector(".content");
+              if (content) {
+                var headers = content.querySelectorAll("h1, h2, h3");
+                if (headers.length > 1) {
+                  floatingToc.style.display = "block"; // 显示目录
+                  var tocList = document.createElement("ul");
+                  floatingToc.appendChild(tocList);
+                  headers.forEach(function (header) {
+                    var li = document.createElement("li");
+                    var level = parseInt(header.tagName.substring(1)) - 1;
+                    li.style.marginLeft = level * 20 + "px"; // 根据标题级别设置缩进
+
+                    // 设置文字大小
+                    switch (level) {
+                      case 0:
+                        li.style.fontSize = "18px";
+                        li.style.color = "#222";
+                        li.className = "h1";
+                        break;
+                      case 1:
+                        li.style.fontSize = "16px";
+                        li.style.color = "#444";
+                        break;
+                      case 2:
+                        li.style.fontSize = "14px";
+                        li.style.color = "#767676";
+                        break;
+                      default:
+                        li.style.fontSize = "14px";
+                    }
+
+                    var anchorLink = document.createElement("a");
+                    anchorLink.href = currentUrl + "#" + header.id;
+                    anchorLink.textContent = header.textContent;
+                    li.appendChild(anchorLink);
+                    tocList.appendChild(li);
+                  });
+                } else {
+                  floatingToc.style.display = "none"; // 隐藏目录
+                }
+
+                var anchors = document.querySelectorAll("h2[id],h3[id],h4[id]");
+                anchors.forEach(function (anchor) {
+                  // 创建一个空的 <div> 元素，并添加 fix-anchor 类
+                  var fixAnchorDiv = document.createElement("div");
+                  fixAnchorDiv.className = "fix-anchor";
+                  // 将原来 <h2> 的 id 赋值给新添加的 <div>
+                  fixAnchorDiv.id = anchor.id;
+                  // 在 <h2> 的前面插入空的 <div> 元素
+                  anchor.parentNode.insertBefore(fixAnchorDiv, anchor);
+                  // 清空 <h2> 的 id 属性
+                  anchor.id = "";
+                });
+              } else {
+                floatingToc.style.display = "none"; // 隐藏目录
+              }
+            });
+          },
+        ],
+      };
+
+      function changeBasePath(select) {
+        var selectedValue = select.value;
+        if (selectedValue === "a") {
+          sessionStorage.setItem("version", "/");
+          sessionStorage.setItem("ver", "a");
+        } else if (selectedValue === "b") {
+          sessionStorage.setItem("version", "/base2");
+          sessionStorage.setItem("ver", "b");
+        }
+
+        window.location.reload();
+      }
+    </script>
+
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+    <!-- plugins -->
+    <script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+    <script src="./assets/js/docsify-copy-code.min.js"></script>
+    <script src="./assets/js/search.min.js"></script>
+  </body>
 </html>
