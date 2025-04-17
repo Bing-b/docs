@@ -1,0 +1,284 @@
+/* ======= 全局样式 ======= */
+body {
+  background-color: #f3f5f5;
+}
+
+header {
+  background-color: #1c2b43;
+}
+
+/* ======= 固定版本选择框 ======= */
+.versionBox {
+  position: fixed;
+  top: 20px;
+  left: 100px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: 200px;
+  padding: 5px;
+  background-color: #fff;
+  border-radius: 4px;
+  z-index: 1111;
+}
+
+.versionBox select {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+}
+
+/* ======= 侧边栏样式 ======= */
+.sidebar {
+  top: 80px;
+  left: 100px !important;
+  padding: 20px 30px 40px;
+}
+
+body.sticky .sidebar {
+  top: 80px;
+  left: 0;
+  height: calc(100% - 90px);
+  padding-top: 30px !important;
+  border-right: none;
+}
+
+.sidebar > h1 {
+  text-align: left;
+}
+
+.sidebar > h1 a {
+  font-size: 25px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.sidebar .sidebar-nav {
+  padding-left: 10px;
+  user-select: none; /* 现代浏览器 */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE / Edge */
+}
+
+/* ======= 主内容区域 ======= */
+main {
+  position: relative;
+  margin-top: 80px;
+  height: auto;
+  z-index: auto;
+}
+
+.content {
+  position: static;
+  overflow-y: auto;
+  padding-left: 320px;
+  padding-top: 0 !important;
+}
+
+.content .markdown-section {
+  position: static;
+  min-height: 90vh;
+  padding: 30px 20px !important;
+  background-color: #fff;
+}
+
+.content .navbar_nav .menu-item {
+  padding: 20px 0 !important;
+}
+
+/* ======= 搜索区域 ======= */
+.search {
+  position: fixed;
+  top: 80px;
+  right: 100px;
+  width: 310px;
+  background-color: #fff;
+  border-radius: 8px;
+  border-bottom: none !important;
+  z-index: 111;
+}
+
+.search input {
+  border: 1px solid #e5e7eb !important;
+  border-radius: 4px;
+}
+
+.search .clear-button svg {
+  transform: scale(0.6) !important;
+}
+
+/* ======= 搜索结果面板 ======= */
+.results-panel {
+  position: fixed;
+  top: 155px;
+  right: 100px;
+  width: 310px;
+  max-height: 75vh;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px solid var(--color-set-one-bor-1);
+  overflow: auto;
+}
+
+/* ======= 右侧浮动目录（TOC） ======= */
+.floating-toc {
+  position: fixed;
+  top: 18%;
+  right: 100px;
+  width: 300px;
+  min-height: 75%;
+  max-height: 70vh;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  overflow: auto;
+  z-index: 11;
+}
+
+.floating-toc h2 {
+  font-size: 20px;
+  opacity: 0.7;
+  margin-bottom: 0;
+}
+
+.floating-toc ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.floating-toc ul li {
+  margin-bottom: 5px;
+  position: relative;
+}
+
+.floating-toc li::before {
+  position: absolute;
+  left: -10px;
+  top: 10px;
+  content: "-";
+  padding-right: 8px;
+}
+
+.floating-toc .h1 {
+  line-height: 3;
+}
+
+.floating-toc .h1::before {
+  display: none;
+}
+
+.floating-toc a {
+  display: block;
+  padding: 5px 0;
+  font-size: inherit !important;
+  color: inherit !important;
+  line-height: 24px;
+  text-decoration: none;
+}
+
+.floating-toc a:hover {
+  color: #717ce0 !important;
+  text-decoration: underline;
+}
+
+/* 浮动 TOC 滚动条样式 */
+.floating-toc::-webkit-scrollbar {
+  width: 4px;
+  height: 10px;
+}
+
+.floating-toc::-webkit-scrollbar-track {
+  background: #efefef;
+  border-radius: 2px;
+}
+
+.floating-toc::-webkit-scrollbar-thumb {
+  background: #b7b7b7;
+  border-radius: 10px;
+}
+
+.floating-toc::-webkit-scrollbar-thumb:hover {
+  background: #767676;
+}
+
+.floating-toc::-webkit-scrollbar-corner {
+  background: #767676;
+}
+
+/* ======= 锚点偏移修正 ======= */
+.fix-anchor {
+  display: block;
+  position: relative;
+  top: -150px;
+  visibility: hidden;
+}
+
+/* ======= 页脚样式 ======= */
+.foot {
+  position: relative;
+  width: 100%;
+  z-index: 10;
+}
+
+.foot .foot-box {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 30px 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #00000017;
+}
+
+.links {
+  display: flex;
+  gap: 6px;
+}
+
+.foot-box a {
+  font-size: 14px;
+  font-weight: 400;
+  color: #64728f;
+}
+
+.elementor-icon-list-text a:hover {
+  color: #717ce0;
+}
+
+/* ======= Docsify 复制按钮样式 ======= */
+.docsify-copy-code-button {
+  position: absolute;
+  top: 10px !important;
+  right: 10px !important;
+  padding: 5px 10px !important;
+  background: #ececec !important;
+  border: none !important;
+}
+
+.docsify-copy-code-button .label {
+  font-size: 14px;
+  color: #717ce0;
+}
+
+.docsify-copy-code-button .success {
+  color: #42b983;
+}
+
+.docsify-copy-code-button .error {
+  color: red;
+}
+
+/* ======= 隐藏不必要元素 ======= */
+.sidebar-toggle,
+.app-sub-sidebar {
+  display: none !important;
+}
+
+/* ======= Markdown 区域边距与最小高度 ======= */
+.markdown-section {
+  margin: 0 440px 100px 100px !important;
+  min-height: 100%;
+}
